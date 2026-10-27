@@ -162,16 +162,48 @@
     </section>
 
     <!-- ====================================================================
-         ELEMENTO 3D PROTAGONISTA — THREE.JS MTB EXPERIENCE
+         ELEMENTO 3D PROTAGONISTA — ORBEA OIZ VERDE MENTA & CONSEJOS MTB MUJER
          ==================================================================== -->
     <section id="bici-3d" class="section bike-3d-section">
       <div class="section-container">
         <div class="section-header">
-          <span class="section-subtitle"><i class="fa-solid fa-cube"></i> Experiencia Digital Inmersiva</span>
+          <span class="section-subtitle"><i class="fa-solid fa-cube"></i> Orbea Oiz M-Team · Verde Menta</span>
           <h2 class="section-title">Nuestra Bici de Montaña en 3D</h2>
           <p class="section-desc">
             Interactúa con el modelo tridimensional en tiempo real. Rota 360°, explora cada ángulo y descubre la anatomía técnica de una máquina concebida para los senderos, trialeras y caminos de nuestra tierra.
           </p>
+        </div>
+
+        <!-- Category Pill Bar for Quick Topic Selection -->
+        <div class="advice-pill-bar" role="tablist" aria-label="Temas recomendados para salidas en bici">
+          <button class="advice-pill-btn active" data-spot="spot-saddle" type="button">
+            <i class="fa-solid fa-person-biking"></i>
+            <span>Sillín & Culotte</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-cockpit" type="button">
+            <i class="fa-solid fa-hand-dots"></i>
+            <span>Guantes & Gafas</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-bottle" type="button">
+            <i class="fa-solid fa-bottle-water"></i>
+            <span>Hidratación & Snack</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-pack" type="button">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Bolsita de Bolsillo</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-wheels" type="button">
+            <i class="fa-solid fa-compact-disc"></i>
+            <span>Ruedas & Repuesto</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-helmet" type="button">
+            <i class="fa-solid fa-helmet-safety"></i>
+            <span>Casco & Peinado</span>
+          </button>
+          <button class="advice-pill-btn" data-spot="spot-shock" type="button">
+            <i class="fa-solid fa-mountain-sun"></i>
+            <span>Suspensión & Filosofía</span>
+          </button>
         </div>
 
         <!-- 3D Canvas Viewport Card -->
@@ -179,55 +211,95 @@
           <div id="bike-3d-canvas-container">
             <div class="canvas-loading-spinner">
               <div class="spinner-ring"></div>
-              <span>Cargando entorno 3D...</span>
+              <span>Cargando Orbea Oiz 3D...</span>
             </div>
           </div>
 
           <!-- Hotspots Container for 3D annotations -->
-          <div id="bike-hotspots" aria-hidden="true"></div>
+          <div id="bike-hotspots" aria-hidden="false"></div>
+
+          <!-- Interaction Hint Overlay -->
+          <div class="bike-interaction-hint" aria-hidden="true">
+            <i class="fa-solid fa-arrows-spin"></i>
+            <span>Arrastra para rotar 360° · Rueda para zoom · Toca los puntos luminosos</span>
+          </div>
 
           <!-- Camera Preset Controls Overlay -->
           <div class="bike-3d-controls-bar">
-            <button id="view-perspective" class="ctrl-btn active" title="Perspectiva 3D dinámico">
+            <button id="view-perspective" class="ctrl-btn active" type="button" title="Perspectiva 3D dinámico">
               <i class="fa-solid fa-arrows-to-circle"></i>
               <span>3D</span>
             </button>
-            <button id="view-side" class="ctrl-btn" title="Vista lateral completa">
+            <button id="view-side" class="ctrl-btn" type="button" title="Vista lateral completa">
               <i class="fa-solid fa-bicycle"></i>
               <span>Lateral</span>
             </button>
-            <button id="view-front" class="ctrl-btn" title="Vista frontal y cockpit">
+            <button id="view-front" class="ctrl-btn" type="button" title="Vista frontal y cockpit">
               <i class="fa-solid fa-eye"></i>
               <span>Frontal</span>
             </button>
-            <button id="toggle-rotate" class="ctrl-btn active" title="Alternar giro automático">
+            <button id="toggle-rotate" class="ctrl-btn active" type="button" title="Alternar giro automático">
               <i class="fa-solid fa-rotate"></i>
               <span>Giro</span>
             </button>
           </div>
         </div>
 
-        <!-- Technical Highlights Grid -->
-        <div class="bike-specs-grid">
-          <article class="spec-card">
-            <i class="fa-solid fa-shield-halved spec-icon"></i>
-            <h3>Geometría Trail</h3>
-            <p>Cuadro hydroformed con ángulo de dirección optimizado para máxima confianza en bajadas técnicas y subidas pronunciadas.</p>
+        <!-- Interactive Advice Card for Women's MTB -->
+        <div id="bike-advice-card" class="bike-advice-card">
+          <div class="advice-card-header">
+            <div class="advice-card-badge-wrap">
+              <span class="badge badge-mint"><i id="advice-icon" class="fa-solid fa-person-biking"></i> <span id="advice-tag">COMODIDAD & ERGONOMÍA</span></span>
+            </div>
+            <div class="advice-card-hint">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Recomendaciones reales de nuestro grupo</span>
+            </div>
+          </div>
+
+          <h3 id="advice-title" class="advice-card-title">El Sillín y el Culotte: Tu mayor aliado</h3>
+
+          <blockquote id="advice-quote" class="advice-card-quote">
+            «El secreto que nadie te cuenta al empezar: ¡el culotte va SIEMPRE sin ropa interior!»
+          </blockquote>
+
+          <p id="advice-desc" class="advice-card-desc">
+            La comodidad sobre la bici no depende de un sillín blando y acolchado, sino de un buen culotte con badana específica para mujer (diseñada para adaptarse a la pelvis femenina). Al no llevar ropa interior debajo, evitas costuras que produzcan rozaduras en rutas largas. Si notas molestias los primeros días, no te preocupes: los isquiones se acostumbran en 2 o 3 salidas.
+          </p>
+
+          <div class="advice-card-footer">
+            <div class="advice-card-tip">
+              <i class="fa-solid fa-circle-check"></i>
+              <span id="advice-tip">Consejo Altrantran: Si vas a comprar tu primer culotte, que sea de tu talla justa para que la badana no se mueva.</span>
+            </div>
+            <a href="#contacto" class="btn btn-sm btn-ghost advice-cta-btn">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>¿Tienes dudas? Pregúntanos</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Pillars of Altrantran Cycling for Women -->
+        <div class="women-mtb-pillars">
+          <article class="pillar-mini-card">
+            <div class="pillar-icon-box"><i class="fa-solid fa-shield-heart"></i></div>
+            <h4>Cero Agobios con el Ritmo</h4>
+            <p>Se adapta la velocidad al grupo. Quien marca el ritmo es la persona que más lo necesita.</p>
           </article>
-          <article class="spec-card red">
-            <i class="fa-solid fa-compress spec-icon"></i>
-            <h3>Suspensión Neumática</h3>
-            <p>Horquilla de 120mm con bloqueo remoto para absorber irregularidades, raíces y pistas bacheadas.</p>
+          <article class="pillar-mini-card">
+            <div class="pillar-icon-box"><i class="fa-solid fa-wrench"></i></div>
+            <h4>Apoyo Mecánico Colectivo</h4>
+            <p>Si pinchas o la cadena se sale, paramos todxs y te ayudamos en el acto. Jamás te quedarás sola.</p>
           </article>
-          <article class="spec-card">
-            <i class="fa-solid fa-gear spec-icon"></i>
-            <h3>Transmisión 1x12</h3>
-            <p>Monoplato con amplio desarrollo para rodar sin saltos de cadena y superar cualquier porcentaje de desnivel.</p>
+          <article class="pillar-mini-card">
+            <div class="pillar-icon-box"><i class="fa-solid fa-seedling"></i></div>
+            <h4>Rutas Asequibles y Bonitas</h4>
+            <p>Senderos llanos y vías verdes junto al Jarama. Nada de trialeras salvajes ni riesgos innecesarios.</p>
           </article>
-          <article class="spec-card red">
-            <i class="fa-solid fa-compact-disc spec-icon"></i>
-            <h3>Frenos Hidráulicos</h3>
-            <p>Discos sobredimensionados de respuesta inmediata y dosificación suave en cualquier condición de barro o polvo.</p>
+          <article class="pillar-mini-card">
+            <div class="pillar-icon-box"><i class="fa-solid fa-venus"></i></div>
+            <h4>Alianza Women in Bike</h4>
+            <p>Salidas guiadas por mujeres para que disfrutes del ciclismo en un ambiente cercano y divertido.</p>
           </article>
         </div>
       </div>

@@ -764,6 +764,67 @@ button {
   to { transform: rotate(360deg); }
 }
 
+/* Quick Selector Pill Bar for Advice Topics */
+.advice-pill-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.5rem 0.25rem 1.25rem;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 229, 163, 0.3) transparent;
+  margin-bottom: 0.75rem;
+}
+
+.advice-pill-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.advice-pill-bar::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 163, 0.3);
+  border-radius: 4px;
+}
+
+.advice-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.advice-pill-btn i {
+  color: var(--mint);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.advice-pill-btn:hover {
+  border-color: var(--mint);
+  color: var(--text-primary);
+  background: rgba(0, 229, 163, 0.08);
+  transform: translateY(-2px);
+}
+
+.advice-pill-btn.active {
+  background: linear-gradient(135deg, rgba(0, 229, 163, 0.22), rgba(0, 229, 163, 0.08));
+  border-color: var(--mint);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 229, 163, 0.25);
+}
+
+.advice-pill-btn.active i {
+  color: #ffffff;
+}
+
 /* 3D Hotspot pins */
 #bike-hotspots {
   position: absolute;
@@ -777,29 +838,35 @@ button {
   transform: translate(-50%, -50%);
   pointer-events: auto;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  z-index: 15;
 }
 
 .pin-dot {
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: var(--mint);
   border: 2px solid #ffffff;
-  box-shadow: 0 0 12px var(--mint);
-  transition: transform var(--transition-fast);
+  box-shadow: 0 0 14px var(--mint);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
 .pin-pulse {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 7.5px;
   transform: translate(-50%, -50%);
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   border: 2px solid var(--mint);
-  animation: hotspotPulse 2s infinite ease-out;
+  animation: hotspotPulse 2.2s infinite ease-out;
   pointer-events: none;
 }
 
@@ -808,44 +875,65 @@ button {
   100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
 }
 
-.pin-tooltip {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  background: rgba(14, 19, 27, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--line-light);
-  padding: 0.8rem 1rem;
-  border-radius: var(--radius-sm);
-  width: 240px;
-  text-align: left;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
-  box-shadow: var(--shadow-md);
-  z-index: 20;
-}
-
-.pin-tooltip h4 {
-  font-size: 0.85rem;
+.pin-label {
+  margin-left: 10px;
+  background: rgba(9, 13, 22, 0.92);
+  color: #f1f5f9;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: var(--mint);
-  margin-bottom: 0.25rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(0, 229, 163, 0.35);
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
 }
 
-.pin-tooltip p {
-  font-size: 0.75rem;
+.hotspot-pin:hover .pin-dot,
+.hotspot-pin.active .pin-dot {
+  background: #ffffff;
+  transform: scale(1.35);
+  box-shadow: 0 0 20px var(--mint), 0 0 35px var(--mint);
+}
+
+.hotspot-pin:hover .pin-label,
+.hotspot-pin.active .pin-label {
+  background: var(--mint);
+  color: #06090e;
+  border-color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* Interaction Hint inside Viewport */
+.bike-interaction-hint {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: var(--radius-full);
+  background: rgba(10, 14, 22, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
-  line-height: 1.4;
+  font-size: 0.72rem;
+  pointer-events: none;
+  z-index: 12;
+  white-space: nowrap;
 }
 
-.hotspot-pin:hover .pin-tooltip,
-.hotspot-pin:focus .pin-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
+.bike-interaction-hint i {
+  color: var(--mint);
+  animation: spinSlow 9s linear infinite;
+}
+
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
 }
 
 /* 3D View Controls Overlay */
@@ -887,8 +975,109 @@ button {
   background: rgba(0, 229, 163, 0.14);
 }
 
-/* 3D Specs Highlights Grid */
-.bike-specs-grid {
+/* Featured Women's MTB Advice Card */
+.bike-advice-card {
+  margin-top: 1.75rem;
+  background: linear-gradient(135deg, rgba(16, 22, 33, 0.95), rgba(10, 14, 22, 0.98));
+  border: 1px solid rgba(0, 229, 163, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2.25rem;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: all 0.35s ease;
+}
+
+.bike-advice-card.highlight {
+  border-color: var(--mint);
+  box-shadow: 0 0 30px rgba(0, 229, 163, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.advice-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.advice-card-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.advice-card-hint i {
+  color: #ffb800;
+}
+
+.advice-card-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.advice-card-quote {
+  border-left: 3px solid var(--mint);
+  padding: 0.75rem 1.25rem;
+  margin: 0 0 1.25rem 0;
+  background: rgba(0, 229, 163, 0.06);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-style: italic;
+  font-size: 1rem;
+  color: #e2e8f0;
+  line-height: 1.5;
+}
+
+.advice-card-desc {
+  font-size: 0.98rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.advice-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.advice-card-tip {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--mint);
+  background: rgba(0, 229, 163, 0.08);
+  border: 1px dashed rgba(0, 229, 163, 0.4);
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--radius-sm);
+  max-width: 680px;
+}
+
+.advice-card-tip i {
+  font-size: 1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.advice-cta-btn {
+  white-space: nowrap;
+}
+
+/* 4 Pillars for Women in MTB */
+.women-mtb-pillars {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
@@ -896,18 +1085,18 @@ button {
 }
 
 @media (min-width: 640px) {
-  .bike-specs-grid {
+  .women-mtb-pillars {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .bike-specs-grid {
+  .women-mtb-pillars {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.spec-card {
+.pillar-mini-card {
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -915,29 +1104,38 @@ button {
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.spec-card:hover {
+.pillar-mini-card:hover {
   transform: translateY(-3px);
-  border-color: var(--line-light);
+  border-color: rgba(0, 229, 163, 0.4);
 }
 
-.spec-icon {
-  font-size: 1.5rem;
+.pillar-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 229, 163, 0.12);
   color: var(--mint);
-  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 0.85rem;
 }
 
-.spec-card.red .spec-icon {
+.pillar-mini-card:nth-child(2) .pillar-icon-box {
+  background: rgba(255, 42, 42, 0.12);
   color: var(--red);
 }
 
-.spec-card h3 {
-  font-size: 1.05rem;
+.pillar-mini-card h4 {
+  font-size: 1rem;
   font-weight: 700;
+  color: #ffffff;
   margin-bottom: 0.4rem;
 }
 
-.spec-card p {
-  font-size: 0.85rem;
+.pillar-mini-card p {
+  font-size: 0.84rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
