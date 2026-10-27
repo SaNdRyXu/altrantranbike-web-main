@@ -1,0 +1,24 @@
+{
+	"name": "altrantranbike",
+	"main": "src/index.js",
+	"compatibility_date": "2026-10-01",
+	"assets": {
+		"directory": "./public",
+		"run_worker_first": [
+			"/api/*"
+		],
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "altrantranbike-db",
+			"database_id": "47e50b06-0c0e-4c09-a30c-0d95059a2bf7"
+		}
+	],
+	"triggers": {
+		"crons": [
+			"0 3 * * *"
+		]
+	}
+}
